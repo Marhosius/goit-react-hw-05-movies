@@ -6,6 +6,7 @@ const Home = () => {
     const [movies, setmovies] = useState([])
     useEffect(() => {
         if (!movies.length) {
+            console.log(`home render`)
             const api = async () => {
                 const { data: { results } } = await getTrending()
                 setmovies([...results])

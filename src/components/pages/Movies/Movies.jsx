@@ -13,15 +13,16 @@ const Movies = () => {
     }
 
     useEffect(() => {
-        if (!movieList.length) {
+        if (searchParams.get(`q`)) {
+            console.log(`render movie list`)
             const api = async () => {
-                const { data: { results } } = await getSearchingMovie(`${searchParams.get(`q`)}`)
+                const { data: { results } } = await getSearchingMovie(`${searchParams.get(`q`)}`, 1)
                 setmovieList([...results])
 
             };
             api();
         }
-    }, [searchParams, movieList])
+    }, [searchParams])
 
     return (
         <div>
@@ -34,7 +35,8 @@ const Movies = () => {
                 <button className="formSubmit" type='submit'>Search</button>
             </form>
             <ul className="movieList">
-                {movieList.length ? movieList.map(({ title, id }) => <MoviesLink key={id} title={title} id={`${id}`} />) : ""}
+                {movieList.length ? movieList.map(({ title, id }) => <MoviesLink key={id} title={title} id={`${id}`} />) :
+                    (searchParams.get(`q`) ? <li><p className="reviewsListName">No movies found</p></li> : "")}
             </ul>
         </div>
 
