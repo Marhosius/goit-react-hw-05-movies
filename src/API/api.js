@@ -11,7 +11,7 @@ const options = {
 export const getTrending = async () => await axios.get('https://api.themoviedb.org/3/trending/movie/day?language=en-US', options)
     .catch(function (error) { Notiflix.Notify.failure(`${error.message}`) });
 
-export const getSearchingMovie = async (find, page) => await axios.get(`https://api.themoviedb.org/3/search/movie?query=${find}&include_adult=true&language=en-US&page=${page}`, options)
+export const getSearchingMovie = async (find, page) => await axios.get(`https://api.themoviedb.org/3/search/movie?query=${find}&include_adult=false&language=en-US&page=${page}`, options)
     .catch(function (error) { Notiflix.Notify.failure(`${error.message}`) });
 
 export const getMovieById = async (id) => await axios.get(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
