@@ -91,6 +91,11 @@
     text-align: center;
 }
 
+.addInfoItmLink {
+    text-decoration: none;
+    color: black;
+}
+
 .addInfoOutlet {
     margin: 0;
 }

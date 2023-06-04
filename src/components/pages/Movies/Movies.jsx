@@ -15,7 +15,6 @@ const Movies = () => {
 
     useEffect(() => {
         if (searchParams.get(`q`)) {
-            console.log(`render movie list`)
             const api = async () => {
                 const { data: { results } } = await getSearchingMovie(`${searchParams.get(`q`)}`, 1)
                 setmovieList([...results])

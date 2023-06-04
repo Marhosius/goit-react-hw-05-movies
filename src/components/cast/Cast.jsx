@@ -9,7 +9,6 @@ const Cast = () => {
     const [cast, setcast] = useState([])
     useEffect(() => {
         if (!cast.length) {
-            console.log(`render cast`)
             const api = async () => {
                 const { data: { cast } } = await getMovieInfo(`${movieId}`, 'credits')
                 setcast([...cast])
