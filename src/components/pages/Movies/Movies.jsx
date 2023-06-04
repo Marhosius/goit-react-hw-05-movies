@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { useSearchParams } from 'react-router-dom'
-import { getSearchingMovie } from 'API/api'
-import MoviesLink from 'components/moviesLink/MoviesLink'
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { getSearchingMovie } from 'API/api';
+import MoviesLink from 'components/moviesLink/MoviesLink';
+import css from './Movies.module.css'
 
 const Movies = () => {
     const [searchParams, setsearchParams] = useSearchParams()
@@ -25,16 +26,16 @@ const Movies = () => {
     }, [searchParams])
 
     return (
-        <div>
-            <form className="searchForm" onSubmit={submitHandler}>
+        <div className={css.movies}>
+            <form className={css.searchForm} onSubmit={submitHandler}>
                 <input
                     type="text"
                     autoFocus
                     placeholder="Search movies"
-                    className="formInput" />
-                <button className="formSubmit" type='submit'>Search</button>
+                    className={css.formInput} />
+                <button className={css.formSubmit} type='submit'>Search</button>
             </form>
-            <ul className="movieList">
+            <ul className={css.movieList}>
                 {movieList.length ? movieList.map(({ title, id }) => <MoviesLink key={id} title={title} id={`${id}`} />) :
                     (searchParams.get(`q`) ? <li><p className="reviewsListName">No movies found</p></li> : "")}
             </ul>

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import { getMovieInfo } from 'API/api';
+import css from './Cast.module.css';
 
 
 const Cast = () => {
@@ -18,13 +19,13 @@ const Cast = () => {
     }, [cast, movieId])
 
     return (
-        <ul className="castList">
+        <ul className={css.castList}>
             {cast?.map(({ name, character, id, profile_path: path }) => {
                 const fullUrl = path ? `https://image.tmdb.org/t/p/w500${path}` : "";
-                return <li className="castListItm" key={id}>
-                    <img src={fullUrl} alt="" className="castListImg" width={80} height={100} />
-                    <p className="castListName">{name}</p>
-                    <p className="castListCharacter">Character: {character}</p>
+                return <li className={css.castListItm} key={id}>
+                    <img src={fullUrl} alt="" className={css.castListImg} width={120} height={160} />
+                    <p className={css.castListName}>{name}</p>
+                    <p className={css.castListCharacter}>Character: {character}</p>
                 </li>
             })}
         </ul>

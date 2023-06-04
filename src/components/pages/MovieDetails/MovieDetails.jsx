@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
 import { getMovieById } from 'API/api';
+import css from './MovieDetails.module.css'
 
 
 const MovieDetails = () => {
@@ -11,15 +12,15 @@ const MovieDetails = () => {
     const votes = `User Score: ${Math.round((vote * 10))}%`;
     const releaseDate = `(${release?.slice(0, 4)})`;
     const location = useLocation()
+    const validLocation = useRef(location.state ?? "/Movies")
     const navigate = useNavigate()
 
     const onBackBTNclick = () => {
-        navigate(location.state ?? "/Movies");
+        navigate(validLocation.current);
     }
 
     useEffect(() => {
         if (!movie.title) {
-            console.log(`render movie details`)
             const api = async () => {
                 const { data } = await getMovieById(`${movieId}`)
                 setmovie({ ...data })
@@ -30,33 +31,37 @@ const MovieDetails = () => {
 
 
     return (
-        < div className='movieContainer' >
-            <button onClick={onBackBTNclick} className="backBtn">Back</button>
-            <div className="movieInfo">
-                <div className="movieInfoImgWrap"><img src={fullUrl} alt="" width={300} height={400} className="movieInfoImg" /></div>
-                <div className="movieInfoWrap">
-                    <h2 className="movieTitle">{title} {releaseDate}</h2>
-                    <p className="movieInfoText">{votes}</p>
-                    <h3 className="movieInfoOv">Overview</h3>
-                    <p className="movieInfoText">{overview}</p>
-                    <h4 className="movieInfoGen">Genres</h4>
-                    <p className="movieInfoText">{(genres?.map(({ name }) => `${name} `))}</p>
+        < div className={css.movieContainer} >
+            <button onClick={onBackBTNclick} className={css.backBtn}>Back</button>
+            <div className={css.movieInfo}>
+                <div className={css.movieInfoImgWrap}>
+                    <img src={fullUrl} alt="" width={250} height={350} className={css.movieInfoIm} />
+                </div>
+                <div className={css.movieInfoWrap}>
+                    <h2 className={css.movieTitle}>{title} {releaseDate}</h2>
+                    <p className={css.movieInfoText}>{votes}</p>
+                    <h3 className={css.movieInfoOv}>Overview</h3>
+                    <p className={css.movieInfoText}>{overview}</p>
+                    <h4 className={css.movieInfoGen}> Genres</h4 >
+                    <p className={css.movieInfoText}>{(genres?.map(({ name }) => `${name} `))}</p>
                 </div>
             </div>
-            <div className="addInfo">
-                <h3 className="addInfoTitle">Additional information</h3>
-                <ul className="addInfoOptionsList">
-                    <li className="addInfoItm">
-                        <Link to='cast' >Cast</Link>
+            <div className={css.addInfo}>
+                < h3 className={css.addInfoTitle} > Additional information</h3 >
+                <ul className={css.addInfoOptionsList}>
+                    <li className={css.addInfoItm}>
+                        <Link className={css.addInfoItmLink} to='cast' >Cast</Link>
                     </li>
-                    <li className="addInfoItm">
-                        <Link to='reviews'>Reviews</Link>
+                    <li className={css.addInfoItm}>
+                        <Link className={css.addInfoItmLink} to='reviews'>Reviews</Link>
                     </li>
                 </ul>
-                <div className="addInfoOutlet">
-                    <Outlet />
+                <div className={css.addInfoOutlet}>
+                    <Suspense fallback={<div>Loading...</div>}>
+                        <Outlet />
+                    </Suspense>
                 </div>
-            </div>
+            </div >
         </div >
     )
 }

@@ -1,0 +1,26 @@
+.castList {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.castListItm {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.castListImg {
+    display: block;
+}
+
+.castListName {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.castListCharacter {
+    margin: 0;
+}

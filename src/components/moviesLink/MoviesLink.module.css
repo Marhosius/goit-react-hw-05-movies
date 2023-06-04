@@ -1,0 +1,17 @@
+.linkItm {
+    background-color: whitesmoke;
+    border-radius: 5px;
+}
+
+.movieLink {
+    display: block;
+    padding: 0 10px;
+    width: 700px;
+    text-decoration: none;
+    color: black;
+
+    line-break: auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}

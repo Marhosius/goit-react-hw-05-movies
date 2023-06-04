@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { getTrending } from 'API/api'
 import MoviesLink from 'components/moviesLink/MoviesLink'
-
+import css from './Home.module.css'
 const Home = () => {
     const [movies, setmovies] = useState([])
     useEffect(() => {
@@ -16,9 +16,9 @@ const Home = () => {
     }, [movies])
 
     return (
-        <div>
-            <h2 className="title">Trending Today</h2>
-            <ul className="listOfmovies">
+        <div className={css.home}>
+            <h2 className={css.homeTitle}>Trending Today</h2>
+            <ul className={css.homeList}>
                 {movies.length && movies.map(({ title, id }) => <MoviesLink key={id} title={title} id={`movies/${id}`} />)}
             </ul>
         </div>

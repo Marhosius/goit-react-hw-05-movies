@@ -1,0 +1,30 @@
+.head {
+    margin: 0;
+    height: 50px;
+    background-color: rgba(128, 128, 128, 0.8);
+}
+
+.headContainer {
+    margin: 0 auto;
+    width: 1200px;
+    padding: 0px 20px;
+    height: 100%;
+}
+
+.headNavbar {
+    display: flex;
+    height: 100%;
+    gap: 20px;
+    align-items: center;
+
+}
+
+.headNavLink {
+    text-decoration: none;
+    color: white;
+    font-size: 22px;
+}
+
+.active {
+    color: red;
+}
