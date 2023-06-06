@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { getTrending } from 'API/api'
-import MoviesLink from 'components/moviesLink/MoviesLink'
 import css from './Home.module.css'
+import MoviesList from 'components/moviesList/MoviesList'
 const Home = () => {
-    const [movies, setmovies] = useState([])
+    const [movies, setmovies] = useState(null)
     useEffect(() => {
-        if (!movies.length) {
+        if (!movies) {
             const api = async () => {
                 const { data: { results } } = await getTrending()
                 setmovies([...results])
@@ -14,12 +14,11 @@ const Home = () => {
         }
     }, [movies])
 
+    if (!movies) return
     return (
         <div className={css.home}>
             <h2 className={css.homeTitle}>Trending Today</h2>
-            <ul className={css.homeList}>
-                {movies.length && movies.map(({ title, id }) => <MoviesLink key={id} title={title} id={`movies/${id}`} />)}
-            </ul>
+            <MoviesList movies={movies} path="movies/"></MoviesList>
         </div>
     )
 }

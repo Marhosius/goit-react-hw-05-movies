@@ -1,0 +1,12 @@
+.home {
+    margin: 0 auto;
+    width: 1200px;
+    padding: 10px 20px;
+    height: 100%;
+}
+
+.homeTitle {
+    text-decoration: none;
+    color: blue;
+    font-size: 22px;
+}

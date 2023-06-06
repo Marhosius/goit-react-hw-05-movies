@@ -20,7 +20,8 @@ const Cast = () => {
     return (
         <ul className={css.castList}>
             {cast?.map(({ name, character, id, profile_path: path }) => {
-                const fullUrl = path ? `https://image.tmdb.org/t/p/w500${path}` : "";
+                const fullUrl = path ? `https://image.tmdb.org/t/p/w500${path}` :
+                    `https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg`;
                 return <li className={css.castListItm} key={id}>
                     <img src={fullUrl} alt="" className={css.castListImg} width={120} height={160} />
                     <p className={css.castListName}>{name}</p>

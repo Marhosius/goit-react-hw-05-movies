@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, Suspense } from 'react';
-import { Link, Outlet, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovieById } from 'API/api';
 import css from './MovieDetails.module.css'
 
@@ -7,17 +7,14 @@ import css from './MovieDetails.module.css'
 const MovieDetails = () => {
     const { movieId } = useParams()
     const [movie, setmovie] = useState({})
-    const { title, overview, genres, poster_path: path, vote_average: vote, release_date: release } = movie
-    const fullUrl = path ? `https://image.tmdb.org/t/p/w500${path}` : "";
+    const { title, overview, genres, poster_path: path,
+        vote_average: vote, release_date: release } = movie
+    const fullUrl = path ? `https://image.tmdb.org/t/p/w500${path}` :
+        `https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg`;
     const votes = `User Score: ${Math.round((vote * 10))}%`;
     const releaseDate = `(${release?.slice(0, 4)})`;
     const location = useLocation()
-    const validLocation = useRef(location.state ?? "/Movies")
-    const navigate = useNavigate()
-
-    const onBackBTNclick = () => {
-        navigate(validLocation.current);
-    }
+    const validLocation = useRef(location?.state ?? "/Movies")
 
     useEffect(() => {
         if (!movie.title) {
@@ -29,10 +26,12 @@ const MovieDetails = () => {
         }
     }, [movie, movieId])
 
+    if (!movie.title) return
 
     return (
+
         < div className={css.movieContainer} >
-            <button onClick={onBackBTNclick} className={css.backBtn}>Back</button>
+            <Link className={css.backBtn} to={validLocation.current}>Back</Link>
             <div className={css.movieInfo}>
                 <div className={css.movieInfoImgWrap}>
                     <img src={fullUrl} alt="" width={250} height={350} className={css.movieInfoIm} />

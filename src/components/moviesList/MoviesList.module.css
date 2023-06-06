@@ -1,0 +1,10 @@
+.homeList {
+    font-size: 18px;
+    font-weight: 500;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}

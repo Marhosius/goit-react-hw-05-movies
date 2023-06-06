@@ -1,0 +1,18 @@
+.searchForm {
+    padding: 10px 0;
+}
+
+.formInput {
+    padding: 5px 10px;
+    font-size: 20px;
+    color: blue;
+    border-radius: 10px;
+}
+
+.formSubmit {
+    font-size: 20px;
+    padding: 5px 10px;
+    margin-left: 10px;
+    color: blue;
+    border-radius: 10px;
+}

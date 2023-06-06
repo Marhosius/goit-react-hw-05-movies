@@ -12,6 +12,8 @@
     margin-left: 10px;
     color: blue;
     border-radius: 10px;
+    border: 1px solid black;
+    text-decoration: none;
 }
 
 .movieInfo {
