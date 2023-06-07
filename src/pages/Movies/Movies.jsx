@@ -13,15 +13,13 @@ const Movies = () => {
     }
 
     useEffect(() => {
-        const qery = searchParams.get(`q`)
-        if (qery) {
-            const api = async () => {
-                const { data: { results } } = await getSearchingMovie(`${qery}`, 1)
-                setmovieList([...results])
-
-            };
-            api();
+        const qery = searchParams.get(`q`);
+        if (!qery) return
+        const api = async () => {
+            const { data: { results } } = await getSearchingMovie(`${qery}`, 1)
+            setmovieList([...results])
         }
+        api();
     }, [searchParams])
 
     return (
