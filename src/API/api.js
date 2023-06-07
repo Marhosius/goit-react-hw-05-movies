@@ -20,3 +20,6 @@ export const getMovieById = async (id) => await axios.get(`https://api.themovied
 export const getMovieInfo = async (id, option) => await axios.get(`https://api.themoviedb.org/3/movie/${id}/${option}?language=en-US`, options)
     .catch(function (error) { Notiflix.Notify.failure(`${error.message}`) });
 
+export const getMovieIMG = async (id) => await axios.get(`https://api.themoviedb.org/3/movie/${id}/images?include_image_language=en&language=en`, options)
+    .catch(function (error) { Notiflix.Notify.failure(`${error.message}`) });
+

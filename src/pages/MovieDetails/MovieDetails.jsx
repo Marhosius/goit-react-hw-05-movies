@@ -52,6 +52,9 @@ const MovieDetails = () => {
                     <li className={css.addInfoItm}>
                         <Link className={css.addInfoItmLink} to='reviews'>Reviews</Link>
                     </li>
+                    <li className={css.addInfoItm}>
+                        <Link className={css.addInfoItmLink} to='images'>Images</Link>
+                    </li>
                 </ul>
                 <div className={css.addInfoOutlet}>
                     <Suspense fallback={<div>Loading...</div>}>

@@ -7,7 +7,7 @@ const MoviesLink = ({ title, id }) => {
     const location = useLocation()
     return (
         <li className={css.linkItm}>
-            <Link className={css.movieLink} state={{ from: location }} to={id} > {title}</Link >
+            <Link className={css.movieLink} state={{ from: location }} to={`/movies/${id}`} > {title}</Link >
         </li>
     )
 }
