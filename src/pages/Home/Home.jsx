@@ -5,21 +5,20 @@ import MoviesList from 'components/moviesList/MoviesList'
 const Home = () => {
     const [movies, setmovies] = useState(null)
     useEffect(() => {
-        if (!movies) {
-            const api = async () => {
-                const { data: { results } } = await getTrending()
-                setmovies([...results])
-            };
-            api();
-        }
-    }, [movies])
+        const api = async () => {
+            const { data: { results } } = await getTrending()
+            setmovies([...results])
+        };
+        api();
+
+    }, [])
 
     if (!movies) return
     return (
         <div className={css.home}>
             <h2 className={css.homeTitle}>Trending Today</h2>
-            <MoviesList movies={movies} path="movies/"></MoviesList>
-        </div>
+            {movies?.length > 0 && < MoviesList movies={movies} path="movies/" />}
+        </div >
     )
 }
 

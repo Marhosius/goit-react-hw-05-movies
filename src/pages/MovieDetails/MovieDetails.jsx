@@ -1,32 +1,30 @@
 import React, { useState, useEffect, useRef, Suspense } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 import { getMovieById } from 'API/api';
-import css from './MovieDetails.module.css'
+import css from './MovieDetails.module.css';
+
+const defaultPicture = `https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg`;
 
 
 const MovieDetails = () => {
     const { movieId } = useParams()
-    const [movie, setmovie] = useState({})
-    const { title, overview, genres, poster_path: path,
-        vote_average: vote, release_date: release } = movie
-    const fullUrl = path ? `https://image.tmdb.org/t/p/w500${path}` :
-        `https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg`;
-    const votes = `User Score: ${Math.round((vote * 10))}%`;
-    const releaseDate = `(${release?.slice(0, 4)})`;
+    const [movie, setmovie] = useState(null)
     const location = useLocation()
-    const validLocation = useRef(location?.state ?? "/Movies")
+    const validLocation = useRef(location?.state?.from ?? "/Movies")
 
     useEffect(() => {
-        if (!movie.title) {
-            const api = async () => {
-                const { data } = await getMovieById(`${movieId}`)
-                setmovie({ ...data })
-            };
-            api();
-        }
-    }, [movie, movieId])
+        const api = async () => {
+            const { data } = await getMovieById(`${movieId}`)
+            setmovie({ ...data })
+        };
+        api();
+    }, [movieId])
 
-    if (!movie.title) return
+    if (!movie) return
+    const { title, overview, genres, poster_path: path, vote_average: vote, release_date: release } = movie
+    const fullUrl = path ? `https://image.tmdb.org/t/p/w500${path}` : defaultPicture;
+    const votes = `User Score: ${Math.round((vote * 10))}%`;
+    const releaseDate = `(${release?.slice(0, 4)})`;
 
     return (
 

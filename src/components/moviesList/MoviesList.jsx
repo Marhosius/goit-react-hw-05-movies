@@ -7,7 +7,7 @@ const MoviesList = ({ movies, path }) => {
     if (!movies) return
     return (
         <ul className={css.homeList}>
-            {movies.length && movies.map(({ title, id }) =>
+            {movies?.length > 0 && movies.map(({ title, id }) =>
                 <MoviesLink key={id} title={title} id={`${path}${id}`} />)}
         </ul>
     )

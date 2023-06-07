@@ -13,9 +13,10 @@ const Movies = () => {
     }
 
     useEffect(() => {
-        if (searchParams.get(`q`)) {
+        const qery = searchParams.get(`q`)
+        if (qery) {
             const api = async () => {
-                const { data: { results } } = await getSearchingMovie(`${searchParams.get(`q`)}`, 1)
+                const { data: { results } } = await getSearchingMovie(`${qery}`, 1)
                 setmovieList([...results])
 
             };
@@ -26,7 +27,7 @@ const Movies = () => {
     return (
         <div className={css.movies}>
             <SearchForm submitHandler={submitHandler}></SearchForm>
-            <MoviesList movies={movieList} path=""></MoviesList>
+            {movieList?.length > 0 && <MoviesList movies={movieList} path="" />}
         </div>
 
     )

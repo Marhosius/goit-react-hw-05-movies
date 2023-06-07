@@ -5,7 +5,7 @@ import css from './Reviews.module.css';
 
 const Reviews = () => {
     const { movieId } = useParams();
-    const [reviews, setreviews] = useState([])
+    const [reviews, setreviews] = useState(null)
     useEffect(() => {
         const api = async () => {
             const { data: { results } } = await getMovieInfo(`${movieId}`, 'reviews')
@@ -13,9 +13,10 @@ const Reviews = () => {
         };
         api();
     }, [movieId])
+    if (!reviews) return
     return (
         <ul className={css.reviewsList}>
-            {reviews.length ? reviews.map(({ author, content, id }) => {
+            {reviews?.length ? reviews.map(({ author, content, id }) => {
                 return <li className={css.reviewsListItm} key={id}>
                     <p className={css.reviewsListName}>{author}</p>
                     <p className={css.reviewsListText}>{content}</p>
